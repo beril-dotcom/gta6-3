@@ -81,8 +81,17 @@ body {
   content: none !important;
 }
 
-body.gta6-hero-direct-grade #webgl-app canvas {
-  filter: url("#gta6-hero-color-grade") saturate(1.12) contrast(1.05);
+body.gta6-hero-image-active #webgl-app canvas {
+  visibility: hidden;
+}
+
+.headerBlock {
+  background: url("/assets/gta6-vice-city-hero.png") center / cover no-repeat !important;
+}
+
+.headerBlock__content::before {
+  display: none !important;
+  content: none !important;
 }
 
 /* Loader and first-click sound state */
@@ -344,6 +353,11 @@ body::after {
 .webglSectionBlock,
 .footerBlock {
   color: var(--vi-white) !important;
+}
+
+.introBlock {
+  background-color: #8500ff !important;
+  background-image: none !important;
 }
 
 .projectBlock {
