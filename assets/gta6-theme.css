@@ -91,10 +91,11 @@ body::after {
   pointer-events: none;
   content: "";
   background:
-    radial-gradient(circle at 67% 26%, rgba(255, 176, 196, 0.38), transparent 31%),
-    radial-gradient(circle at 22% 76%, rgba(92, 111, 183, 0.42), transparent 38%),
-    linear-gradient(180deg, rgba(12, 13, 27, 0.06), rgba(12, 13, 27, 0.38));
-  mix-blend-mode: color;
+    radial-gradient(circle at 72% 18%, rgba(255, 176, 196, 0.92), transparent 34%),
+    radial-gradient(circle at 18% 82%, rgba(49, 55, 121, 0.96), transparent 44%),
+    linear-gradient(128deg, rgba(40, 31, 78, 0.94) 0%, rgba(179, 65, 133, 0.84) 52%, rgba(255, 141, 65, 0.86) 100%);
+  opacity: 0.88;
+  mix-blend-mode: multiply;
 }
 
 /* Loader and first-click sound state */
@@ -169,6 +170,23 @@ body::after {
   background-color: var(--vi-pink) !important;
 }
 
+.navbarBlock__left .mainButton,
+.navbarBlock__right .links__link {
+  padding: 0.58rem 1rem;
+  border: 1px solid rgba(255, 232, 234, 0.28);
+  border-radius: var(--vi-pill-radius);
+  background: rgba(12, 13, 27, 0.3);
+  backdrop-filter: blur(12px) saturate(1.35);
+}
+
+.navbarBlock__right .links__link:hover,
+.navbarBlock__left .mainButton:hover {
+  color: var(--vi-ink) !important;
+  background: var(--vi-pink);
+  border-color: var(--vi-pink);
+  text-shadow: none;
+}
+
 .soundButton__line,
 .menuButton .default__line,
 .menuButton .cross__line {
@@ -225,6 +243,36 @@ body::after {
 .introBlock,
 .beeBlock {
   color: var(--vi-white) !important;
+}
+
+.headerBlock .content__description {
+  width: min(9.6em, 78vw) !important;
+  max-width: none !important;
+  font-size: clamp(2.65rem, 4.3vw, 5.25rem) !important;
+  font-weight: 760 !important;
+  line-height: 0.92 !important;
+  text-transform: uppercase;
+  color: var(--vi-cream) !important;
+  text-shadow:
+    0 3px 0 rgba(12, 13, 27, 0.4),
+    0 18px 50px rgba(12, 13, 27, 0.7) !important;
+}
+
+.content__scrollIndication {
+  display: inline-flex;
+  width: max-content;
+  padding: 0.72rem 1.12rem;
+  margin-top: 1.2rem;
+  color: var(--vi-ink) !important;
+  background: var(--vi-pink);
+  border-radius: var(--vi-pill-radius);
+  box-shadow: 0 12px 38px rgba(255, 122, 168, 0.34);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.content__scrollIndication * {
+  color: var(--vi-ink) !important;
 }
 
 .headerBlock .content__description,
