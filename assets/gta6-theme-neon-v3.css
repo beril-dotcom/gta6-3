@@ -56,21 +56,6 @@ body {
   background: var(--vi-pink);
 }
 
-body::after {
-  position: fixed;
-  inset: 0;
-  z-index: 9998;
-  pointer-events: none;
-  content: "";
-  opacity: 0.12;
-  background-image:
-    radial-gradient(circle at 20% 15%, rgba(255, 176, 196, 0.35) 0 1px, transparent 1.5px),
-    radial-gradient(circle at 78% 72%, rgba(204, 194, 245, 0.3) 0 1px, transparent 1.5px);
-  background-position: 0 0, 5px 6px;
-  background-size: 9px 9px, 11px 11px;
-  mix-blend-mode: soft-light;
-}
-
 /* Color-grade the existing 3D world while preserving every WebGL interaction. */
 #webgl-app,
 #webgl-top-app {
@@ -85,53 +70,19 @@ body::after {
   filter: none;
 }
 
-#webgl-app::after {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  content: "";
-  background:
-    radial-gradient(circle at 72% 18%, rgba(255, 176, 196, 0.92), transparent 34%),
-    radial-gradient(circle at 18% 82%, rgba(49, 55, 121, 0.96), transparent 44%),
-    linear-gradient(128deg, rgba(40, 31, 78, 0.94) 0%, rgba(179, 65, 133, 0.84) 52%, rgba(255, 141, 65, 0.86) 100%);
-  opacity: 0.32;
-  mix-blend-mode: multiply;
-}
-
-/* Hero-only GTA VI color grade. Keep the existing 3D scene and camera motion intact. */
-.headerBlock {
-  position: relative;
-}
-
+/*
+ * Directly recolor the rendered Hero scene. This is a pixel-level color grade
+ * on the WebGL canvas, not a gradient or pseudo-element placed above it.
+ */
+#webgl-app::after,
 .headerBlock::before,
 .headerBlock::after {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  content: "";
+  display: none !important;
+  content: none !important;
 }
 
-.headerBlock::before {
-  z-index: 1;
-  background:
-    radial-gradient(circle at 72% 22%, rgba(255, 176, 196, 0.98), transparent 34%),
-    radial-gradient(circle at 16% 80%, rgba(62, 64, 101, 0.96), transparent 45%),
-    linear-gradient(126deg, rgba(36, 49, 82, 0.92) 0%, rgba(196, 81, 143, 0.78) 54%, rgba(255, 173, 54, 0.78) 100%);
-  opacity: 0.86;
-  mix-blend-mode: color;
-}
-
-.headerBlock::after {
-  z-index: 1;
-  background:
-    radial-gradient(ellipse at center, transparent 38%, rgba(12, 13, 27, 0.58) 100%),
-    linear-gradient(180deg, rgba(12, 13, 27, 0.04), rgba(12, 13, 27, 0.36));
-  mix-blend-mode: multiply;
-}
-
-.headerBlock__content {
-  position: relative;
-  z-index: 2;
+body.gta6-hero-direct-grade #webgl-app canvas {
+  filter: url("#gta6-hero-color-grade") saturate(1.12) contrast(1.05);
 }
 
 /* Loader and first-click sound state */
@@ -182,17 +133,6 @@ body::after {
   text-shadow: 0 1px 18px rgba(7, 8, 16, 0.55);
 }
 
-.navbarBlock::before {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  content: "";
-  background: linear-gradient(180deg, rgba(12, 13, 27, 0.76), rgba(12, 13, 27, 0));
-  backdrop-filter: blur(3px);
-  mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
-}
-
 .navbarBlock .mainButton,
 .navbarBlock .links__link,
 .navbarBlock .navLabButton,
@@ -235,6 +175,16 @@ body::after {
   color: var(--vi-white) !important;
   background: rgba(12, 13, 27, 0.95) !important;
   backdrop-filter: blur(22px) saturate(1.3);
+}
+
+/* Keep functional menu layers in the DOM, but remove every visual overlay. */
+.navbarBlock__overlay,
+.footerBlock__overlay,
+.items__mask,
+.videoPlayer__videoContrast {
+  background: transparent !important;
+  background-image: none !important;
+  backdrop-filter: none !important;
 }
 
 .menu__links .links__link {
@@ -369,7 +319,7 @@ body::after {
 .media__poster,
 .mediaComponent__video,
 .mediaComponent__poster {
-  filter: saturate(1.32) contrast(1.08) brightness(0.92) sepia(0.04) hue-rotate(324deg);
+  filter: none;
 }
 
 .slider__media,
@@ -380,16 +330,11 @@ body::after {
 
 .slider__media::after,
 .items__media::after,
-.bottom__video::after {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  content: "";
-  background:
-    linear-gradient(180deg, transparent 52%, rgba(15, 12, 26, 0.62) 100%),
-    linear-gradient(125deg, rgba(92, 111, 183, 0.13), rgba(255, 176, 196, 0.12) 55%, rgba(255, 173, 54, 0.1));
-  mix-blend-mode: multiply;
+.bottom__video::after,
+.navbarBlock::before,
+body::after {
+  display: none !important;
+  content: none !important;
 }
 
 /* Sections and project information */
@@ -553,7 +498,7 @@ body::after {
 }
 
 .videoPlayer__videoContrast {
-  background: linear-gradient(180deg, rgba(12, 13, 27, 0.1), rgba(12, 13, 27, 0.34)) !important;
+  background: transparent !important;
 }
 
 .videoPlayer__progress .progress__track {
@@ -566,7 +511,6 @@ body::after {
 
 /* Preserve usability for people who opt out of visual effects. */
 @media (prefers-reduced-motion: reduce) {
-  body::after,
   #webgl-app::after {
     display: none;
   }
@@ -619,9 +563,7 @@ body::after {
 }
 
 .webglBg.footerBlock {
-  background:
-    linear-gradient(90deg, rgba(12, 13, 27, 0.92) 0%, rgba(12, 13, 27, 0.62) 43%, rgba(12, 13, 27, 0.16) 100%),
-    url("/assets/neon-noir/footer.webp") center / cover no-repeat !important;
+  background: url("/assets/neon-noir/footer.webp") center / cover no-repeat !important;
 }
 
 .webglBg__content.footerBlock {
