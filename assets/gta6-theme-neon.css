@@ -1,0 +1,600 @@
+/*
+ * GTA VI-inspired visual theme.
+ * The original portfolio structure, WebGL scenes and motion timeline stay intact.
+ * This layer only changes color, typography, surfaces and image treatment.
+ */
+
+:root {
+  color-scheme: dark;
+  --vi-ink: #0c0d1b;
+  --vi-night: #101528;
+  --vi-panel: #243152;
+  --vi-plum: #4b2f54;
+  --vi-pink: #ffb0c4;
+  --vi-pink-hot: #ff7aa8;
+  --vi-blush: #fee8ea;
+  --vi-lavender: #ccc2f5;
+  --vi-cream: #fff9cb;
+  --vi-orange: #ffad36;
+  --vi-white: #fff;
+  --vi-shadow: rgba(7, 8, 16, 0.72);
+  --vi-card-radius: clamp(1.125rem, 2vw, 2rem);
+  --vi-pill-radius: 9999px;
+  --vi-gradient-sunset: linear-gradient(122deg, #5f4f8d 0%, #d583aa 43%, #ffb06b 100%);
+  --vi-gradient-night: linear-gradient(150deg, #0c0d1b 0%, #17182d 45%, #322744 100%);
+}
+
+html {
+  background: var(--vi-ink) !important;
+  color: var(--vi-white) !important;
+}
+
+body {
+  background: transparent !important;
+  color: var(--vi-white) !important;
+}
+
+#vue-app,
+.app,
+.page {
+  background: transparent !important;
+  color: var(--vi-white) !important;
+}
+
+html,
+body {
+  overscroll-behavior: none;
+}
+
+body {
+  font-family: "Avantt", "Monument Grotesk", Arial, sans-serif;
+  text-rendering: geometricPrecision;
+}
+
+::selection {
+  color: var(--vi-ink);
+  background: var(--vi-pink);
+}
+
+body::after {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  content: "";
+  opacity: 0.12;
+  background-image:
+    radial-gradient(circle at 20% 15%, rgba(255, 176, 196, 0.35) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 78% 72%, rgba(204, 194, 245, 0.3) 0 1px, transparent 1.5px);
+  background-position: 0 0, 5px 6px;
+  background-size: 9px 9px, 11px 11px;
+  mix-blend-mode: soft-light;
+}
+
+/* Color-grade the existing 3D world while preserving every WebGL interaction. */
+#webgl-app,
+#webgl-top-app {
+  background: transparent !important;
+}
+
+#webgl-app canvas {
+  filter: none;
+}
+
+#webgl-top-app canvas {
+  filter: none;
+}
+
+#webgl-app::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background:
+    radial-gradient(circle at 72% 18%, rgba(255, 176, 196, 0.92), transparent 34%),
+    radial-gradient(circle at 18% 82%, rgba(49, 55, 121, 0.96), transparent 44%),
+    linear-gradient(128deg, rgba(40, 31, 78, 0.94) 0%, rgba(179, 65, 133, 0.84) 52%, rgba(255, 141, 65, 0.86) 100%);
+  opacity: 0.88;
+  mix-blend-mode: multiply;
+}
+
+/* Loader and first-click sound state */
+.loaderBlock {
+  color: var(--vi-white) !important;
+  background:
+    radial-gradient(circle at 72% 28%, rgba(255, 176, 196, 0.34), transparent 28%),
+    radial-gradient(circle at 20% 82%, rgba(98, 58, 85, 0.7), transparent 42%),
+    var(--vi-gradient-night) !important;
+}
+
+.loaderBlock .container__title,
+.loaderBlock .title__content,
+.loaderBlock .progress__text {
+  color: var(--vi-blush) !important;
+  text-transform: uppercase;
+  letter-spacing: -0.035em;
+}
+
+.loaderBlock .progress__circle,
+.loaderBlock .circle--inactive {
+  border-color: rgba(255, 176, 196, 0.4) !important;
+}
+
+.loaderBlock .circle--animated {
+  border-color: var(--vi-pink) !important;
+  filter: drop-shadow(0 0 12px rgba(255, 176, 196, 0.72));
+}
+
+.cursorIndication {
+  color: var(--vi-ink) !important;
+  background: var(--vi-pink) !important;
+  border-radius: var(--vi-pill-radius) !important;
+  box-shadow: 0 10px 36px rgba(255, 122, 168, 0.34);
+}
+
+.cursorIndication__text,
+.beeTextIndication__text,
+.beeTextIndication__label {
+  color: inherit !important;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Navigation */
+.navbarBlock {
+  color: var(--vi-white) !important;
+  text-shadow: 0 1px 18px rgba(7, 8, 16, 0.55);
+}
+
+.navbarBlock::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(180deg, rgba(12, 13, 27, 0.76), rgba(12, 13, 27, 0));
+  backdrop-filter: blur(3px);
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
+}
+
+.navbarBlock .mainButton,
+.navbarBlock .links__link,
+.navbarBlock .navLabButton,
+.navbarBlock .soundButton,
+.navbarBlock .menuButton {
+  color: var(--vi-white) !important;
+}
+
+.navbarBlock .links__link::after,
+.navbarBlock .mainButton::after {
+  background-color: var(--vi-pink) !important;
+}
+
+.navbarBlock__left .mainButton,
+.navbarBlock__right .links__link {
+  padding: 0.58rem 1rem;
+  border: 1px solid rgba(255, 232, 234, 0.28);
+  border-radius: var(--vi-pill-radius);
+  background: rgba(12, 13, 27, 0.3);
+  backdrop-filter: blur(12px) saturate(1.35);
+}
+
+.navbarBlock__right .links__link:hover,
+.navbarBlock__left .mainButton:hover {
+  color: var(--vi-ink) !important;
+  background: var(--vi-pink);
+  border-color: var(--vi-pink);
+  text-shadow: none;
+}
+
+.soundButton__line,
+.menuButton .default__line,
+.menuButton .cross__line {
+  background: var(--vi-white) !important;
+}
+
+.navbarBlock__menu,
+.navbarBlock__overlay,
+.footerBlock__overlay {
+  color: var(--vi-white) !important;
+  background: rgba(12, 13, 27, 0.95) !important;
+  backdrop-filter: blur(22px) saturate(1.3);
+}
+
+.menu__links .links__link {
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+}
+
+.menu__links .links__link:hover,
+.menu__links .links__link--current {
+  color: var(--vi-pink) !important;
+}
+
+/* Display typography */
+.headerBlock .content__description,
+.heroBlock .baseline__text,
+.beeBlock .title,
+.introBlock .baseline__text--0,
+.introBlock .baseline__text--1,
+.projectBlock__title,
+.projectBlock .title__name,
+.webglSectionBlock__text,
+.archivesBlock__title,
+.footerBlock .content__textWrapper,
+.footerBlock .wrapper__text {
+  font-family: "Monument Grotesk", "Avantt", Arial, sans-serif !important;
+  letter-spacing: -0.045em;
+}
+
+.projectBlock__title,
+.webglSectionBlock__text,
+.archivesBlock__title,
+.footerBlock .wrapper__text {
+  text-transform: uppercase;
+}
+
+.headerBlock .content__description,
+.headerBlock .content__description .line,
+.headerBlock .content__description .line-mask,
+.content__scrollIndication,
+.content__scrollIndication *,
+.heroBlock,
+.introBlock,
+.beeBlock {
+  color: var(--vi-white) !important;
+}
+
+.headerBlock .content__description {
+  width: min(9.6em, 78vw) !important;
+  max-width: none !important;
+  font-size: clamp(2.65rem, 4.3vw, 5.25rem) !important;
+  font-weight: 760 !important;
+  line-height: 0.92 !important;
+  text-transform: uppercase;
+  color: var(--vi-cream) !important;
+  text-shadow:
+    0 3px 0 rgba(12, 13, 27, 0.4),
+    0 18px 50px rgba(12, 13, 27, 0.7) !important;
+}
+
+.content__scrollIndication {
+  display: inline-flex;
+  width: max-content;
+  padding: 0.72rem 1.12rem;
+  margin-top: 1.2rem;
+  color: var(--vi-ink) !important;
+  background: var(--vi-pink);
+  border-radius: var(--vi-pill-radius);
+  box-shadow: 0 12px 38px rgba(255, 122, 168, 0.34);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.content__scrollIndication * {
+  color: var(--vi-ink) !important;
+}
+
+.headerBlock .content__description,
+.beeBlock .title,
+.introBlock .baseline__text--0,
+.introBlock .baseline__text--1 {
+  text-shadow: 0 3px 24px rgba(7, 8, 16, 0.54);
+}
+
+.heroBlock .top__star,
+.introBlock .bottom__stars,
+.top__star {
+  color: var(--vi-pink) !important;
+  filter: drop-shadow(0 0 12px rgba(255, 176, 196, 0.62));
+}
+
+.agencyLink,
+.top__link,
+.text__link,
+.networks__link,
+.credits__button,
+.links__contact {
+  color: var(--vi-pink) !important;
+}
+
+.agencyLink:hover,
+.top__link:hover,
+.text__link:hover,
+.networks__link:hover,
+.credits__button:hover,
+.links__contact:hover {
+  color: var(--vi-cream) !important;
+}
+
+/* Video and project imagery: illustrated sunset color treatment. */
+.mediaComponent,
+.bottom__video,
+.slider__media,
+.items__media,
+.media__inner,
+.media__content {
+  overflow: hidden;
+  border-radius: var(--vi-card-radius) !important;
+}
+
+.bottom__video,
+.slider__media,
+.items__media {
+  border: 1px solid rgba(255, 232, 234, 0.14);
+  box-shadow:
+    0 30px 80px rgba(7, 8, 16, 0.48),
+    0 0 0 1px rgba(204, 194, 245, 0.06) inset;
+}
+
+.mediaComponent__media,
+.media__image,
+.media__video,
+.media__poster,
+.mediaComponent__video,
+.mediaComponent__poster {
+  filter: saturate(1.32) contrast(1.08) brightness(0.92) sepia(0.04) hue-rotate(324deg);
+}
+
+.slider__media,
+.items__media,
+.bottom__video {
+  position: relative;
+}
+
+.slider__media::after,
+.items__media::after,
+.bottom__video::after {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  content: "";
+  background:
+    linear-gradient(180deg, transparent 52%, rgba(15, 12, 26, 0.62) 100%),
+    linear-gradient(125deg, rgba(92, 111, 183, 0.13), rgba(255, 176, 196, 0.12) 55%, rgba(255, 173, 54, 0.1));
+  mix-blend-mode: multiply;
+}
+
+/* Sections and project information */
+.introBlock,
+.projectBlock,
+.archivesBlock,
+.webglSectionBlock,
+.footerBlock {
+  color: var(--vi-white) !important;
+}
+
+.projectBlock {
+  background:
+    radial-gradient(circle at 82% 18%, rgba(75, 47, 84, 0.34), transparent 28%),
+    linear-gradient(
+      180deg,
+      rgba(12, 13, 27, 0.18) 0%,
+      rgba(12, 13, 27, 0.22) 54%,
+      rgba(12, 13, 27, 0.88) 69%,
+      var(--vi-ink) 100%
+    ) !important;
+}
+
+.projectBlock__title,
+.projectBlock .title__number,
+.projectBlock .title__name,
+.projectBlock .title__type,
+.projectBlock .top__date,
+.projectBlock .top__team,
+.projectBlock .roles__text,
+.projectBlock .roles__role,
+.projectBlock .recognitions__recognition {
+  color: var(--vi-white) !important;
+}
+
+.projectBlock .title__number,
+.projectBlock .top__date,
+.projectBlock .team__text,
+.projectBlock .roles__text {
+  color: var(--vi-lavender) !important;
+}
+
+.projectBlock .title__name {
+  text-transform: uppercase;
+}
+
+.arrowButton,
+.navLabButton {
+  border-radius: var(--vi-pill-radius);
+}
+
+.projectBlock .arrowButton,
+.footerBlock .credits__button {
+  padding: 0.72em 1.28em;
+  color: var(--vi-ink) !important;
+  background: var(--vi-pink) !important;
+  border-radius: var(--vi-pill-radius);
+  box-shadow: 0 12px 30px rgba(255, 122, 168, 0.2);
+}
+
+.projectBlock .arrowButton:hover,
+.footerBlock .credits__button:hover {
+  background: var(--vi-blush) !important;
+}
+
+.arrow__rect {
+  fill: var(--vi-ink) !important;
+  stroke: var(--vi-ink) !important;
+}
+
+.webglSectionBlock {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 176, 196, 0.2), transparent 32%),
+    linear-gradient(180deg, rgba(12, 13, 27, 0.5), rgba(33, 29, 59, 0.56) 55%, rgba(75, 47, 84, 0.5)) !important;
+}
+
+.webglSectionBlock__text--base {
+  color: rgba(255, 255, 255, 0.18) !important;
+}
+
+.webglSectionBlock__text--reveal {
+  color: var(--vi-cream) !important;
+  text-shadow: 0 0 35px rgba(255, 176, 196, 0.2);
+}
+
+/* Archives */
+.archivesBlock {
+  background:
+    radial-gradient(circle at 100% 25%, rgba(98, 58, 85, 0.42), transparent 30%),
+    linear-gradient(180deg, #111326 0%, var(--vi-ink) 100%) !important;
+}
+
+.archivesBlock__title {
+  color: var(--vi-blush) !important;
+}
+
+.archivesBlock__items,
+.archivesBlock .items__title,
+.archivesBlock .items__roles,
+.archivesBlock .items__date,
+.archivesBlock .items__agency,
+.archivesBlock .items__text {
+  color: var(--vi-white) !important;
+}
+
+.archivesBlock .items__roles,
+.archivesBlock .items__date,
+.archivesBlock .items__agency,
+.archivesBlock .text__infos {
+  color: var(--vi-lavender) !important;
+}
+
+.items__separator,
+.archivesBlock__separator,
+.separator__line {
+  background-color: rgba(204, 194, 245, 0.26) !important;
+  border-color: rgba(204, 194, 245, 0.26) !important;
+}
+
+.archivesBlock__items:hover .items__title,
+.archivesBlock__items:hover .items__arrow,
+.archivesBlock__items:hover .items__date {
+  color: var(--vi-pink) !important;
+}
+
+/* Footer and modal */
+.footerBlock {
+  background:
+    radial-gradient(circle at 26% 10%, rgba(255, 176, 196, 0.3), transparent 30%),
+    radial-gradient(circle at 85% 76%, rgba(255, 173, 54, 0.13), transparent 28%),
+    linear-gradient(150deg, #15162a 0%, #332541 52%, #17182d 100%) !important;
+}
+
+.footerBlock__bottom,
+.bottom__credits,
+.bottom__networks,
+.bottom__copyright,
+.footerBlock .right__text,
+.footerBlock .content__textWrapper,
+.footerBlock .wrapper__text {
+  color: var(--vi-white) !important;
+}
+
+.footerBlock__popup {
+  color: var(--vi-white) !important;
+  background: linear-gradient(145deg, #17182d, #4b2f54) !important;
+}
+
+.footerBlock__popup .top__cross,
+.videoPlayer__close,
+.videoPlayer__compactPlayPause {
+  color: var(--vi-ink) !important;
+  background: var(--vi-pink) !important;
+  border-radius: 50%;
+}
+
+.videoPlayer,
+.videoPlayer__whiteMask,
+.videoPlayer__letterboxMask {
+  background: var(--vi-ink) !important;
+}
+
+.videoPlayer__videoContrast {
+  background: linear-gradient(180deg, rgba(12, 13, 27, 0.1), rgba(12, 13, 27, 0.34)) !important;
+}
+
+.videoPlayer__progress .progress__track {
+  background: rgba(255, 255, 255, 0.24) !important;
+}
+
+.videoPlayer__progress .progress__fill {
+  background: var(--vi-pink) !important;
+}
+
+/* Preserve usability for people who opt out of visual effects. */
+@media (prefers-reduced-motion: reduce) {
+  body::after,
+  #webgl-app::after {
+    display: none;
+  }
+}
+
+/* Original Neon Noir portfolio artwork. The existing slider DOM and motion remain unchanged. */
+.page > .wrapper > .webglBg.projectBlock .slider__media {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.page > .wrapper > .webglBg.projectBlock:nth-child(1) .slider__media {
+  background-image: url("/assets/neon-noir/project-1.webp");
+}
+
+.page > .wrapper > .webglBg.projectBlock:nth-child(2) .slider__media {
+  background-image: url("/assets/neon-noir/project-2.webp");
+}
+
+.page > .wrapper > .webglBg.projectBlock:nth-child(3) .slider__media {
+  background-image: url("/assets/neon-noir/project-3.webp");
+}
+
+.page > .wrapper > .webglBg.projectBlock:nth-child(5) .slider__media {
+  background-image: url("/assets/neon-noir/project-4.webp");
+}
+
+.page > .wrapper > .webglBg.projectBlock:nth-child(6) .slider__media {
+  background-image: url("/assets/neon-noir/project-5.webp");
+}
+
+.page > .wrapper > .webglBg.projectBlock:nth-child(7) .slider__media {
+  background-image: url("/assets/neon-noir/project-6.webp");
+}
+
+.page > .wrapper > .webglBg.projectBlock .slider__media:nth-child(3n + 1) {
+  background-position: 38% center;
+  background-size: auto 108%;
+}
+
+.page > .wrapper > .webglBg.projectBlock .slider__media:nth-child(3n + 2) {
+  background-position: 62% center;
+  background-size: auto 116%;
+}
+
+.page > .wrapper > .webglBg.projectBlock .slider__media:nth-child(3n) {
+  background-position: center;
+  background-size: cover;
+}
+
+.webglBg.footerBlock {
+  background:
+    linear-gradient(90deg, rgba(12, 13, 27, 0.92) 0%, rgba(12, 13, 27, 0.62) 43%, rgba(12, 13, 27, 0.16) 100%),
+    url("/assets/neon-noir/footer.webp") center / cover no-repeat !important;
+}
+
+.webglBg__content.footerBlock {
+  background: transparent !important;
+}
+
+/* Keep the animated WebGL footer foreground, but never let it cover the CTA copy. */
+.footerBlock__webglBee .beeBlock__container {
+  position: relative;
+  z-index: 220;
+  pointer-events: none;
+}

@@ -535,3 +535,59 @@ body::after {
     display: none;
   }
 }
+
+/* Original Neon Noir portfolio artwork. The existing slider DOM and motion remain unchanged. */
+.page > .wrapper > .webglBg.projectBlock .slider__media {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.page > .wrapper > .webglBg.projectBlock:nth-child(1) .slider__media {
+  background-image: url("/assets/neon-noir/project-1.webp");
+}
+
+.page > .wrapper > .webglBg.projectBlock:nth-child(2) .slider__media {
+  background-image: url("/assets/neon-noir/project-2.webp");
+}
+
+.page > .wrapper > .webglBg.projectBlock:nth-child(3) .slider__media {
+  background-image: url("/assets/neon-noir/project-3.webp");
+}
+
+.page > .wrapper > .webglBg.projectBlock:nth-child(5) .slider__media {
+  background-image: url("/assets/neon-noir/project-4.webp");
+}
+
+.page > .wrapper > .webglBg.projectBlock:nth-child(6) .slider__media {
+  background-image: url("/assets/neon-noir/project-5.webp");
+}
+
+.page > .wrapper > .webglBg.projectBlock:nth-child(7) .slider__media {
+  background-image: url("/assets/neon-noir/project-6.webp");
+}
+
+.page > .wrapper > .webglBg.projectBlock .slider__media:nth-child(3n + 1) {
+  background-position: 38% center;
+  background-size: auto 108%;
+}
+
+.page > .wrapper > .webglBg.projectBlock .slider__media:nth-child(3n + 2) {
+  background-position: 62% center;
+  background-size: auto 116%;
+}
+
+.page > .wrapper > .webglBg.projectBlock .slider__media:nth-child(3n) {
+  background-position: center;
+  background-size: cover;
+}
+
+.webglBg.footerBlock {
+  background:
+    linear-gradient(90deg, rgba(12, 13, 27, 0.92) 0%, rgba(12, 13, 27, 0.62) 43%, rgba(12, 13, 27, 0.16) 100%),
+    url("/assets/neon-noir/footer.webp") center / cover no-repeat !important;
+}
+
+.webglBg__content.footerBlock {
+  background: transparent !important;
+}
