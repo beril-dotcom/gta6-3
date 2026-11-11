@@ -94,8 +94,44 @@ body::after {
     radial-gradient(circle at 72% 18%, rgba(255, 176, 196, 0.92), transparent 34%),
     radial-gradient(circle at 18% 82%, rgba(49, 55, 121, 0.96), transparent 44%),
     linear-gradient(128deg, rgba(40, 31, 78, 0.94) 0%, rgba(179, 65, 133, 0.84) 52%, rgba(255, 141, 65, 0.86) 100%);
-  opacity: 0.88;
+  opacity: 0.32;
   mix-blend-mode: multiply;
+}
+
+/* Hero-only GTA VI color grade. Keep the existing 3D scene and camera motion intact. */
+.headerBlock {
+  position: relative;
+}
+
+.headerBlock::before,
+.headerBlock::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+}
+
+.headerBlock::before {
+  z-index: 1;
+  background:
+    radial-gradient(circle at 72% 22%, rgba(255, 176, 196, 0.98), transparent 34%),
+    radial-gradient(circle at 16% 80%, rgba(62, 64, 101, 0.96), transparent 45%),
+    linear-gradient(126deg, rgba(36, 49, 82, 0.92) 0%, rgba(196, 81, 143, 0.78) 54%, rgba(255, 173, 54, 0.78) 100%);
+  opacity: 0.86;
+  mix-blend-mode: color;
+}
+
+.headerBlock::after {
+  z-index: 1;
+  background:
+    radial-gradient(ellipse at center, transparent 38%, rgba(12, 13, 27, 0.58) 100%),
+    linear-gradient(180deg, rgba(12, 13, 27, 0.04), rgba(12, 13, 27, 0.36));
+  mix-blend-mode: multiply;
+}
+
+.headerBlock__content {
+  position: relative;
+  z-index: 2;
 }
 
 /* Loader and first-click sound state */
